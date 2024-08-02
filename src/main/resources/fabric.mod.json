@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "lcc-additions",
+  "version": "${version}",
+  "name": "LuminaCC additions",
+  "description": "Special additions for LuminaCC",
+  "authors": [
+    "The LuminaCC team"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/lcc-additions/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.luminacc.additions.client.mainClient"
+    ],
+    "main": [
+      "org.luminacc.additions.main"
+    ]
+  },
+  "mixins": [
+    "lcc-additions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
