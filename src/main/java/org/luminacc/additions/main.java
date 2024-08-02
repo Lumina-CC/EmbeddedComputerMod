@@ -10,5 +10,6 @@ public class main implements ModInitializer {
     @Override
     public void onInitialize() {
         var a = new registry();
+        a.registerPeripherals();
     }
 }

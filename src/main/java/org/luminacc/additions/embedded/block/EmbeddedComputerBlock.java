@@ -69,8 +69,14 @@ public class EmbeddedComputerBlock extends HorizontalFacingBlock implements Bloc
         var blockEntity1 = world.getBlockEntity(blockPos);
         if (!world.isClient() && !isNull(blockEntity1)) {
             var blockEntity = (EmbeddedComputerBlockEntity) blockEntity1;
-            var computer = blockEntity.createServerComputer();
-            computer.turnOn();
+            var computer = blockEntity.getServerComputer();
+            if (isNull(computer)) {
+                computer = blockEntity.createServerComputer();
+                computer.turnOn();
+            }
+            else {
+                computer.reboot();
+            }
         }
         return ActionResult.success(true);
     }
