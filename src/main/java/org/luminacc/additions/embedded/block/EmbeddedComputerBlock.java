@@ -27,7 +27,7 @@ public class EmbeddedComputerBlock extends HorizontalFacingBlock implements Bloc
     public static EnumProperty powered = EnumProperty.of("state", ComputerState.class);
     public EmbeddedComputerBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(powered,ComputerState.OFF));
+        setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(powered,ComputerState.ON));
     }
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

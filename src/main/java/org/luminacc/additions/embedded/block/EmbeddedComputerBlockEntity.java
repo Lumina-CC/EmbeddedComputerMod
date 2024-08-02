@@ -5,6 +5,7 @@ import dan200.computercraft.shared.computer.blocks.ComputerBlockEntity;
 import dan200.computercraft.shared.computer.core.ComputerFamily;
 import dan200.computercraft.shared.computer.core.ServerComputer;
 import net.minecraft.block.BlockState;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.luminacc.additions.embedded.EmbeddedComputerPeripheral;
@@ -35,4 +36,13 @@ public class EmbeddedComputerBlockEntity extends ComputerBlockEntity {
         return p = new EmbeddedComputerPeripheral(this);
     }
 
+    @Override
+    public void unload() {
+        super.unload();
+    }
+
+    @Override
+    public void loadServer(NbtCompound nbt) {
+        super.loadServer(nbt);
+    }
 }

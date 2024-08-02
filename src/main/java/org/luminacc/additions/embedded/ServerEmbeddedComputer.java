@@ -10,6 +10,6 @@ import static org.luminacc.additions.main.log;
 
 public class ServerEmbeddedComputer extends ServerComputer {
     public ServerEmbeddedComputer(ServerWorld level, BlockPos position, int computerID, @Nullable String label) {
-        super(level, position, computerID, label, ComputerFamily.ADVANCED, 10, 4);
+        super(level, position, computerID, label, ComputerFamily.ADVANCED, 10, 10);
     }
 }

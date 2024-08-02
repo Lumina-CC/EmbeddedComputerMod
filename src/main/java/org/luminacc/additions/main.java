@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class main implements ModInitializer {
 
-    public static Logger log = LoggerFactory.getLogger("");
+    public static Logger log = LoggerFactory.getLogger("LccAdditions");
     @Override
     public void onInitialize() {
         var a = new registry();
