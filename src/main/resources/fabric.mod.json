@@ -1,29 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "lcc-additions",
+  "id": "embeddedcomputer",
   "version": "${version}",
-  "name": "LuminaCC additions",
-  "description": "Special additions for LuminaCC",
+  "name": "Embedded Computer",
+  "description": "Embedded computer for CC",
   "authors": [
-    "The LuminaCC team"
+    "Featherwhisker"
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/lcc-additions/icon.png",
+  "icon": "assets/embeddedcomputer/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "org.luminacc.additions.client.mainClient"
+      "org.featherwhisker.embeddedcomputer.client.mainClient"
     ],
     "main": [
-      "org.luminacc.additions.main"
+      "org.featherwhisker.embeddedcomputer.main"
     ]
   },
-  "mixins": [
-    "lcc-additions.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
+    "computercraft": ">=1.111.0",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   }

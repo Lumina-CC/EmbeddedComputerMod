@@ -1,2 +1,2 @@
-# lcc-additions
-Mod that adds things made for the LuminaCC server
+# EmbeddedComputerMod
+This mod adds the embedded computer block and related things

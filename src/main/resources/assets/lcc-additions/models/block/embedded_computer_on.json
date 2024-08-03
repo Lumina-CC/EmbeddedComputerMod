@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "computercraft:block/computer_advanced_top",
-        "front": "lcc-additions:block/computer_embedded_on_nocursor",
-        "side": "computercraft:block/computer_advanced_side"
-    }
-}
