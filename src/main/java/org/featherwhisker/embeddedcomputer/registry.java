@@ -19,6 +19,7 @@ import org.featherwhisker.embeddedcomputer.embedded.EmbeddedComputerPeripheral;
 import org.featherwhisker.embeddedcomputer.embedded.block.EmbeddedComputerBlock;
 import org.featherwhisker.embeddedcomputer.embedded.block.EmbeddedComputerBlockEntity;
 import org.featherwhisker.embeddedcomputer.embedded.item.ComputerBlockItem;
+import org.featherwhisker.embeddedcomputer.platform.registry1;
 
 public class registry {
     public static Block EMBEDDED_COMPUTER = Registry.register(
@@ -37,18 +38,11 @@ public class registry {
             new ComputerBlockItem(EMBEDDED_COMPUTER)
     );
 
-    public static final ItemGroup LCC_ADDITIONS_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(EMBEDDED_COMPUTER))
-            .displayName(Text.translatable("itemGroup.embeddedcomputer"))
-            .build();
-    public static RegistryKey<ItemGroup> itemGroupKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of("embeddedcomputer", "item_group"));
     public void registerPeripherals() {
         PeripheralLookup.get().registerForBlockEntities(EmbeddedComputerPeripheral::getPeripheral,EMBEDDED_COMPUTER_ENTITY);
     }
     public void registerItemGroups() {
-        Registry.register(Registries.ITEM_GROUP,itemGroupKey, LCC_ADDITIONS_GROUP);
-        ItemGroupEvents.modifyEntriesEvent(itemGroupKey).register(itemGroup -> {
-            itemGroup.add(EMBEDDED_COMPUTER_ITEM);
-        });
+        var a = new registry1();
+        a.registerItemGroups();
     }
 }
