@@ -6,8 +6,16 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -15,15 +23,22 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.state.property.EnumProperty;
+import org.jetbrains.annotations.Nullable;
+import org.luminacc.additions.embedded.item.ComputerBlockItem;
 import org.luminacc.additions.registry;
+
+import java.util.List;
 
 import static java.util.Objects.isNull;
 
 public class EmbeddedComputerBlock<T extends EmbeddedComputerBlockEntity> extends HorizontalFacingBlock  implements BlockEntityProvider {
     public static EnumProperty powered = EnumProperty.of("state", ComputerState.class);
+    private Item cachedItem;
+
     public EmbeddedComputerBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(powered,ComputerState.OFF));
@@ -85,4 +100,19 @@ public class EmbeddedComputerBlock<T extends EmbeddedComputerBlockEntity> extend
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
     }
+
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        var id = -1;
+        var comp1 = world.getBlockEntity(pos);
+        if (!isNull(comp1)) {
+            id = ((EmbeddedComputerBlockEntity) comp1).getComputerID();
+        }
+        return ((ComputerBlockItem)registry.EMBEDDED_COMPUTER_ITEM).newComputerItem(id);
+    }
+
+    public Item asItem() {
+        return registry.EMBEDDED_COMPUTER_ITEM;
+    }
+
 }

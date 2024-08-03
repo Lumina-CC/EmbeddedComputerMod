@@ -19,6 +19,7 @@ import net.minecraft.util.Identifier;
 import org.luminacc.additions.embedded.EmbeddedComputerPeripheral;
 import org.luminacc.additions.embedded.block.EmbeddedComputerBlock;
 import org.luminacc.additions.embedded.block.EmbeddedComputerBlockEntity;
+import org.luminacc.additions.embedded.item.ComputerBlockItem;
 
 public class registry {
     public static Block EMBEDDED_COMPUTER = Registry.register(
@@ -34,7 +35,7 @@ public class registry {
     public static Item EMBEDDED_COMPUTER_ITEM = Registry.register(
             Registries.ITEM,
             new Identifier("lcc-additions", "embedded_computer"),
-            new BlockItem(EMBEDDED_COMPUTER,new Item.Settings().fireproof())
+            new ComputerBlockItem(EMBEDDED_COMPUTER)
     );
 
     public static final ItemGroup LCC_ADDITIONS_GROUP = FabricItemGroup.builder()
