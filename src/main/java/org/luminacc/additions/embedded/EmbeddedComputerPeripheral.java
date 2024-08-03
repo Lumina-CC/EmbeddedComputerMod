@@ -33,9 +33,6 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
     @Nullable
     public ServerComputer getServerComp() {
         var comp1 = comp.getServerComputer();
-        if (!isNull(comp1) && !comp1.getLevel().isClient()) {
-            comp1 = comp.createServerComputer();
-        }
         return comp1;
     }
 
@@ -57,13 +54,10 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
                 for (String i : comp1.getAPIEnvironment().getFileSystem().list("/")) {
                     try {
                         comp1.getAPIEnvironment().getFileSystem().delete("/"+i);
-                    } catch (Exception e) {
-                        log.info(e.getMessage());
-                    }
+                    } catch(Exception ignored){}
                 }
-            } catch (Exception e) {
-                log.info(e.getMessage());
-            }
+                comp1.reboot();
+            }catch(Exception ignored){}
         }
     }
 

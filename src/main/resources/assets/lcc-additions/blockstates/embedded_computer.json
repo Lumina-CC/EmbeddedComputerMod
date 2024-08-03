@@ -1,9 +1,9 @@
 {
   "variants": {
-    "facing=north,state=blinking": { "model": "lcc-additions:block/embedded_computer_on"},
-    "facing=east,state=blinking":  { "model": "lcc-additions:block/embedded_computer_on", "y":  90},
-    "facing=south,state=blinking": { "model": "lcc-additions:block/embedded_computer_on", "y": 180},
-    "facing=west,state=blinking":  { "model": "lcc-additions:block/embedded_computer_on", "y": 270},
+    "facing=north,state=blinking": { "model": "lcc-additions:block/embedded_computer_blinking"},
+    "facing=east,state=blinking":  { "model": "lcc-additions:block/embedded_computer_blinking", "y":  90},
+    "facing=south,state=blinking": { "model": "lcc-additions:block/embedded_computer_blinking", "y": 180},
+    "facing=west,state=blinking":  { "model": "lcc-additions:block/embedded_computer_blinking", "y": 270},
 	"facing=north,state=on": { "model": "lcc-additions:block/embedded_computer_on"},
     "facing=east,state=on":  { "model": "lcc-additions:block/embedded_computer_on", "y":  90},
     "facing=south,state=on": { "model": "lcc-additions:block/embedded_computer_on", "y": 180},

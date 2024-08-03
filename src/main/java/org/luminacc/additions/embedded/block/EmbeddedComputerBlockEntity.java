@@ -15,6 +15,7 @@ import org.luminacc.additions.registry;
 import javax.annotation.Nullable;
 
 import static java.util.Objects.isNull;
+import static org.luminacc.additions.main.log;
 
 public class EmbeddedComputerBlockEntity extends ComputerBlockEntity {
     private @Nullable IPeripheral p;
@@ -27,7 +28,6 @@ public class EmbeddedComputerBlockEntity extends ComputerBlockEntity {
                 (ServerWorld) getWorld(), getPos(), id, label
         );
     }
-
     @Override
     public IPeripheral peripheral() {
         if (!isNull(p)){
@@ -35,14 +35,25 @@ public class EmbeddedComputerBlockEntity extends ComputerBlockEntity {
         }
         return p = new EmbeddedComputerPeripheral(this);
     }
-
+    protected boolean wasOn = false;
     @Override
-    public void unload() {
-        super.unload();
-    }
-
-    @Override
-    public void loadServer(NbtCompound nbt) {
-        super.loadServer(nbt);
+    public void serverTick() {
+        if (getWorld().isClient) {
+            return; //no.
+        }
+        if (getComputerID() < 0) {
+            return;
+        }
+        var comp = createServerComputer();
+        var currentlyOn = comp.isOn();
+        if (currentlyOn != wasOn) {
+            wasOn = currentlyOn;
+            markDirty();
+        }
+        if (!currentlyOn) {
+            comp.turnOn();
+        }
+        comp.keepAlive();
+        updateBlockState(comp.getState());
     }
 }

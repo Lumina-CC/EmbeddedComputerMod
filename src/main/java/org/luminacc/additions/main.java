@@ -11,5 +11,6 @@ public class main implements ModInitializer {
     public void onInitialize() {
         var a = new registry();
         a.registerPeripherals();
+        a.registerItemGroups();
     }
 }
