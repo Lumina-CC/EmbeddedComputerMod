@@ -1,15 +1,20 @@
 package org.featherwhisker.embeddedcomputer.embedded;
 
+import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.filesystem.WritableMount;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.shared.computer.blocks.AbstractComputerBlockEntity;
-import dan200.computercraft.shared.computer.core.ServerComputer;
+import dan200.computercraft.core.computer.Computer;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import org.featherwhisker.embeddedcomputer.embedded.block.EmbeddedComputerBlockEntity;
+import java.lang.reflect.Method;
+import dan200.computercraft.core.filesystem.FileSystem;
 import static java.util.Objects.isNull;
+import static org.featherwhisker.embeddedcomputer.main.log;
 
 public class EmbeddedComputerPeripheral implements IPeripheral {
     public final EmbeddedComputerBlockEntity comp;
@@ -29,10 +34,9 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
         return false;
     }
 
-    @Nullable
-    public ServerComputer getServerComp() {
+    public ServerEmbeddedComputer getServerComp() {
         var comp1 = comp.getServerComputer();
-        return comp1;
+        return (ServerEmbeddedComputer) comp1;
     }
 
     @LuaFunction
@@ -42,7 +46,7 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
     }
     @LuaFunction
     public final void reboot() {
-        var comp1= getServerComp();
+        var comp1 = getServerComp();
         if (!isNull(comp1)) comp1.reboot();
     }
     @LuaFunction
@@ -50,13 +54,20 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
         var comp1 = getServerComp();
         if (!isNull(comp1)) {
             try {
-                for (String i : comp1.getAPIEnvironment().getFileSystem().list("/")) {
-                    try {
-                        comp1.getAPIEnvironment().getFileSystem().delete("/"+i);
-                    } catch(Exception ignored){}
-                }
+                WritableMount fs = ComputerCraftAPI.createSaveDirMount(comp1.getLevel().getServer(), "computer/" + comp1.getID(), 100);
+                try {
+                    fs.delete("/startup.lua");
+                } catch(Exception ignored){}
+                try {
+                    fs.delete("/startup");
+                } catch(Exception ignored){}
+                try {
+                    fs.delete("/.settings");
+                } catch(Exception ignored){}
                 comp1.reboot();
-            }catch(Exception ignored){}
+            }catch(Exception ignored){
+                log.info(ignored.getMessage());
+            }
         }
     }
 
