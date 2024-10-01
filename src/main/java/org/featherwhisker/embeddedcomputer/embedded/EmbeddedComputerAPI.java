@@ -25,17 +25,11 @@ public class EmbeddedComputerAPI implements ILuaAPI {
             try {
                 WritableMount fs = ComputerCraftAPI.createSaveDirMount(comp.getLevel().getServer(), "computer/" + comp.getID(), 100);
                 try {
-                    fs.delete("/startup.lua");
-                } catch(Exception ignored){}
-                try {
-                    fs.delete("/startup");
-                } catch(Exception ignored){}
-                try {
-                    fs.delete("/.settings");
-                } catch(Exception ignored){}
+                    fs.delete("/");
+                }catch(Exception ignored){}
                 comp.reboot();
             }catch(Exception ignored){
-                log.info(ignored.getMessage());
+                log.info(ignored.getMessage(),ignored.fillInStackTrace());
             }
         }
     }
