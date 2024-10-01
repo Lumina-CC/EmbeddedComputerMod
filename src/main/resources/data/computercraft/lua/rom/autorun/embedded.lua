@@ -1,3 +1,5 @@
+--TODO: Find a better way to add the embedded API like how we did it
+--      before the 1.112.0 update
 local function printMessageToMonitor()
     local monitors = {peripheral.find("monitor")}
     for _, monitor in pairs(monitors) do

@@ -22,7 +22,7 @@
   "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "computercraft": ">=1.111.0",
+    "computercraft": ">=1.112.0",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
