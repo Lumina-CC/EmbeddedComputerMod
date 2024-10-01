@@ -23,21 +23,9 @@ local function printMessageToMonitor()
     sleep(10)
 end
 
-local function isEmbedded()
-    local termX, termY = term.getSize()
-    if termX == 10 and termY == 10 then
-        return true
-    end
-end
 
-if isEmbedded() then
-    _G.embedded = {}
-    function _G.embedded.format()
-        local root = fs.list("/")
-        for _,v in pairs(root) do
-            pcall(fs.delete,"/"+v)
-        end
-    end
+
+if embedded then
     if fs.exists("/startup.lua") then
         return
     end
