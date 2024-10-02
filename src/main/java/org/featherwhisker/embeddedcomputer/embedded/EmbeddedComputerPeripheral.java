@@ -47,7 +47,7 @@ public class EmbeddedComputerPeripheral implements IPeripheral {
         var comp1 = getServerComp();
         if (!isNull(comp1)) comp1.reboot();
     }
-    @LuaFunction
+    @LuaFunction(mainThread = true)
     public final void format() {
         var comp1 = getServerComp();
         if (!isNull(comp1)) {

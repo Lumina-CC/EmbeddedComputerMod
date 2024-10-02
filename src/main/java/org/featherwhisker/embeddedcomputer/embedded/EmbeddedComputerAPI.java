@@ -18,7 +18,7 @@ public class EmbeddedComputerAPI implements ILuaAPI {
     public String[] getNames() {
         return new String[]{"embedded"};
     }
-    @LuaFunction
+    @LuaFunction(mainThread = true)
     public final void format() { //
         ServerComputer comp = brain.getOwner().getServerComputer();
         if (!isNull(comp)) {
